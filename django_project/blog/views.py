@@ -12,3 +12,14 @@ def index(request):
     return render(request, 'blog/index.html', {  # 중괄호로 묶에서 보낼 수 있음
         'posts': posts  # context로 넘겨줌
     })
+
+
+def single_post_page(request, post_num):
+    post = Post.objects.get(pk=post_num)
+
+    return render(
+        request,
+        'blog/single_post_page.html', {
+            'post': post
+        }
+    )

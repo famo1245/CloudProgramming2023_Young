@@ -15,3 +15,6 @@ class Post(models.Model):
         # f는 formatting
         return f'[{self.pk}] {self.title}'
         # return self.title
+
+    def get_absolute_url(self):
+        return f'/blog/{self.pk}/'
