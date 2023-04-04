@@ -4,6 +4,19 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=20, unique=True)
+    slug = models.SlugField(max_length=50, unique=True, allow_unicode=True)
+
+    # toString override
+    def __str__(self):
+        return self.name
+
+    # Categorys 수정
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+
 class Post(models.Model):
     title = models.CharField(max_length=30)
     hook_msg = models.CharField(max_length=100, blank=True)
@@ -17,6 +30,9 @@ class Post(models.Model):
 
     # override 해서 custom 객체로도 사용 가능, call back 함수를 통채로 넘겨줌
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    # category
+    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
 
     # toString method override
     def __str__(self):
