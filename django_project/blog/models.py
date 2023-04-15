@@ -43,7 +43,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     # override 해서 custom 객체로도 사용 가능, call back 함수를 통채로 넘겨줌
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
 
     # category
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
