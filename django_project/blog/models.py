@@ -44,7 +44,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # override 해서 custom 객체로도 사용 가능, call back 함수를 통채로 넘겨줌
+    # override 해서 custom 객체로도 사용 가능, call back 함수를 통채로 넘겨줌, 일대다 관계
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
 
     # category
@@ -68,3 +68,19 @@ class Post(models.Model):
 
     def get_content_markdown(self):
         return markdown(self.content)
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # markdown 알아서 해라
+    content = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.author} - {self.content}'
+
+    def get_absolute_url(self):
+        return f'{self.post.get_absolute_url()}#comment-{self.pk}'
