@@ -2,6 +2,8 @@ import os.path
 
 from django.db import models
 from django.contrib.auth.models import User
+from markdown import markdown
+from markdownx.models import MarkdownxField
 
 
 class Tag(models.Model):
@@ -26,7 +28,7 @@ class Category(models.Model):
     def get_absolute_url(self):
         return f'/blog/category/{self.slug}'
 
-    # Categorys 수정
+    # Categories 로 수정
     class Meta:
         verbose_name_plural = 'Categories'
 
@@ -34,7 +36,7 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=30)
     hook_msg = models.CharField(max_length=100, blank=True)
-    content = models.TextField()
+    content = MarkdownxField()
 
     head_image = models.ImageField(upload_to='blog/images/%Y/%m/%d/', blank=True)
     file_upload = models.FileField(upload_to='blog/files/%Y/%m/%d/', blank=True)
@@ -63,3 +65,6 @@ class Post(models.Model):
     def get_file_name(self):
         # 파일의 경로 부분을 잘라줌
         return os.path.basename(self.file_upload.name)
+
+    def get_content_markdown(self):
+        return markdown(self.content)

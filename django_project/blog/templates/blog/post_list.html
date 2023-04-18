@@ -24,6 +24,7 @@
             <div class="card-body">
                 <h2 class="card-title">{{ p.title }} ({{ p.category }})</h2>
                 {% if p.hook_msg %}
+                    <!-- 수업에서는 content를 쓰기 때문에 p.get_content_markdown | safe 를 써야 함 -->
                     <p class="card-text">{{ p.hook_msg }}</p>
                 {% else %}
                     <p class="card-text">요약된 내용</p>

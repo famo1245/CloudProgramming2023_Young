@@ -22,6 +22,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
     fields = ['title', 'hook_msg', 'content', 'head_image', 'file_upload', 'category', 'tag']
 
+    # for validation
     def test_func(self):
         return self.request.user.is_superuser or self.request.user.is_staff
 

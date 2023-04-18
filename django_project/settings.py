@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    'single_pages'
+    'single_pages',
+
+    'crispy_forms',
+    'crispy_bootstrap4',
+    'markdownx',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +126,8 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 # 미디어를 관리하는 폴더는 하나
 MEDIA_ROOT = os.path.join(BASE_DIR, '_media')
+# crispy 적용 스타일 명시
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
