@@ -37,12 +37,13 @@
 
         <!-- Post Content -->
         <p>{{ post.get_content_markdown | safe }}</p>
-
+        <hr>
         {% if post.file_upload %}
             <a href="{{ post.file_upload.url }}" class="btn btn-outline-primary">첨부파일 다운로드</a>
             {{ post.get_file_name }}
+            <hr>
         {% endif %}
-        <hr>
+
 
         <!-- Tag Content -->
         {% if post.tag.exists %}
